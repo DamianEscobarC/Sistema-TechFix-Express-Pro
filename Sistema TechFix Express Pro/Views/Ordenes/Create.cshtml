@@ -1,0 +1,101 @@
+﻿@model Sistema_TechFix_Express_Pro.Models.OrdenServicio
+
+@{
+    ViewData["Title"] = "Nueva Orden de Servicio";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Registrar Nueva Orden de Servicio</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Create" method="post">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label asp-for="NumeroOrden" class="form-label fw-bold"></label>
+                        <input asp-for="NumeroOrden" class="form-control" placeholder="Ej: ORD-503" />
+                        <span asp-validation-for="NumeroOrden" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label asp-for="NombreCliente" class="form-label fw-bold"></label>
+                        <input asp-for="NombreCliente" class="form-control" />
+                        <span asp-validation-for="NombreCliente" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label asp-for="TelefonoCliente" class="form-label fw-bold"></label>
+                        <input asp-for="TelefonoCliente" class="form-control" placeholder="+56912345678" />
+                        <span asp-validation-for="TelefonoCliente" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="CategoriaId" class="form-label fw-bold"></label>
+                        <select asp-for="CategoriaId" asp-items="ViewBag.CategoriaId" class="form-select">
+                            <option value="">-- Seleccione una categoría --</option>
+                        </select>
+                        <span asp-validation-for="CategoriaId" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="TecnicoId" class="form-label fw-bold"></label>
+                        <select asp-for="TecnicoId" asp-items="ViewBag.TecnicoId" class="form-select">
+                            <option value="">-- Seleccione un técnico --</option>
+                        </select>
+                        <span asp-validation-for="TecnicoId" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="DescripcionFalla" class="form-label fw-bold"></label>
+                        <textarea asp-for="DescripcionFalla" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="DescripcionFalla" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label asp-for="CostoEstimado" class="form-label fw-bold"></label>
+                        <input asp-for="CostoEstimado" class="form-control" type="number" />
+                        <span asp-validation-for="CostoEstimado" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label asp-for="FechaIngreso" class="form-label fw-bold"></label>
+                        <input asp-for="FechaIngreso" class="form-control" type="date" />
+                        <span asp-validation-for="FechaIngreso" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label asp-for="Estado" class="form-label fw-bold"></label>
+                        <select asp-for="Estado" class="form-select">
+                            <option value="Pendiente">Pendiente</option>
+                            <option value="En Reparacion">En Reparación</option>
+                            <option value="Listo">Listo</option>
+                            <option value="Entregado">Entregado</option>
+                        </select>
+                        <span asp-validation-for="Estado" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input asp-for="TieneGarantia" class="form-check-input" type="checkbox" />
+                            <label asp-for="TieneGarantia" class="form-check-label fw-semibold"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-success">Guardar Orden</button>
+                    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

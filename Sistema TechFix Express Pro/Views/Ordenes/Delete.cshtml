@@ -1,0 +1,37 @@
+﻿@model Sistema_TechFix_Express_Pro.Models.OrdenServicio
+
+@{
+    ViewData["Title"] = "Eliminar Orden de Servicio";
+}
+
+<div class="container mt-4">
+    <div class="card border-danger shadow-sm">
+        <div class="card-header bg-danger text-white">
+            <h4 class="mb-0">¿Confirmar eliminación de la orden @Model.NumeroOrden?</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Cliente:</dt>
+                <dd class="col-sm-9">@Model.NombreCliente (@Model.TelefonoCliente)</dd>
+
+                <dt class="col-sm-3">Categoría:</dt>
+                <dd class="col-sm-9">@Model.Categoria?.Nombre</dd>
+
+                <dt class="col-sm-3">Técnico Asignado:</dt>
+                <dd class="col-sm-9">@Model.Tecnico?.NombreCompleto</dd>
+
+                <dt class="col-sm-3">Falla Reportada:</dt>
+                <dd class="col-sm-9">@Model.DescripcionFalla</dd>
+
+                <dt class="col-sm-3">Presupuesto:</dt>
+                <dd class="col-sm-9">@Model.CostoEstimado.ToString("C0")</dd>
+            </dl>
+
+            <form asp-action="Delete" method="post">
+                <input type="hidden" asp-for="Id" />
+                <button type="submit" class="btn btn-danger">Eliminar Definitivamente</button>
+                <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>
